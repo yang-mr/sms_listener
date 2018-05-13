@@ -1,12 +1,11 @@
 package helper.jack.com.sms;
 
 import android.database.ContentObserver;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import helper.jack.com.sms.helper.SmsCallback;
 import helper.jack.com.sms.helper.SmsHelper;
-import helper.jack.com.sms.helper.domain.SmsBean;
 
 public class MainActivity extends AppCompatActivity {
     private ContentObserver mSmsObserver;
@@ -15,12 +14,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSmsObserver = SmsHelper.registerContentObserver(this, new SmsCallback() {
+        mSmsObserver = SmsHelper.registerContentObserver(this, new Handler(new Handler.Callback() {
             @Override
-            public void call(SmsBean bean) {
-
+            public boolean handleMessage(Message msg) {
+                return false;
             }
-        });
+        }));
     }
 
     @Override
